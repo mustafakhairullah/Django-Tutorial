@@ -1,9 +1,47 @@
-<h1>{{ question.question_text }}</h1>
-
-<ul>
+{% comment %} <ul>
 {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
-</ul>
+</ul> {% endcomment %}
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+
+.container {
+  width: 100%;
+  background-color: #ddd;
+}
+
+.votes {
+  text-align: right;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.qn_one {width: 90%; background-color: #4CAF50;}
+.qn_two {width: 80%; background-color: #2196F3;}
+.qn_three {width: 65%; background-color: #f44336;}
+
+</style>
+</head>
+<body>
+
+<h1>{{ question.question_text }}</h1>
+
+{% for choice in question.choice_set.all %}
+    <p>{{ choice.choice_text }}</p>
+    <div class="container">
+        <div class="votes qn_one">{{ choice.votes }}%</div>
+    </div>
+{% endfor %}
+
+</body>
+</html>
+
